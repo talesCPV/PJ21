@@ -6,29 +6,13 @@
         $source = $_POST ["source"];
         
         switch ($source) {
-            case "login":
-                $user = crip($_POST ["param_0"]);
-                $pass = crip($_POST ["param_1"]);
-                $query = "SELECT * FROM tb_user WHERE user='{$user}' AND pass='{$pass}';";
-                $result = mysqli_query($conexao, $query);
-                $qtd_lin = $result->num_rows;
-                if($qtd_lin >0){
-                    $fetch = mysqli_fetch_row($result);
-                    $id = $fetch[0];
-                    $user = decrip($fetch[1]);
-                    $class = decrip($fetch[3]);                    
-                    $class = substr($class, strlen($user),strlen($class));
-                    $arr = [200,$user,$class];                    
+            case "pesq_prod":
+                $tipo = $_POST ["param_0"];
+                $valor = $_POST ["param_1"];
 
-                    setcookie("log", "true", 8 * time()+3600);
-                    setcookie("user_id", $id, 8 * time()+3600);
-                    setcookie("user", $user, 8 * time()+3600);
-                    setcookie("class", $class, 8 * time()+3600);
-                }else{
-                    $arr = [500,"usuario ou senha incorreta"];
-                }
-                print json_encode($arr);
-                $found = false;                
+                $query =  "SELECT p.id, p.cod, p.descricao, p.unidade, p.estoque, p.cod_bar, e.nome, p.preco_comp, p.margem, p.ncm, p.tipo FROM tb_produto AS p INNER JOIN tb_empresa AS e ON p.descricao LIKE '%".$valor."%' AND p.id_emp = e.id ORDER BY cast(p.cod as unsigned integer);";
+
+                $found = true;                
                 break;
             default:
                 $found = false;
@@ -37,7 +21,7 @@
 
         if($found){
             $result = mysqli_query($conexao, $query);
-            $qtd_lin = $result->num_rows;
+//            $qtd_lin = $result->num_rows;
             $arr = [];
             while($fetch = mysqli_fetch_row($result)){
                 $arr[] = $fetch;            

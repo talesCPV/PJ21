@@ -32,13 +32,13 @@ signinForm.addEventListener("submit",function(event){
 	const resp = sendFetch('files/login.php');
 
     resp.then(result =>{
-        let resp = JSON.parse(result);
-        let status = resp[0];
+        let arr = JSON.parse(result);
+        let status = arr[0];
         if (status === 200){
 //            alert("Seja bem vindo "+resp[1]+" sua permissão é "+resp[2]);
 			window.location.href = "main.php";
         }else{
-            alert(resp[1]);
+            alert(arr[1]);
         }
        
     });
