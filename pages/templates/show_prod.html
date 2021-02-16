@@ -1,0 +1,24 @@
+<div class="display">
+
+
+
+</div>
+<script>
+    let id = global_id;
+
+    const query = queryDB("pesq_prod",['p.id='+id+' AND p.id',id]);
+    query.then(result =>{
+        alert(result)
+            let arr = JSON.parse(result);
+
+            arr.forEach((item)=>{
+                alert(item);
+            
+            });
+
+        });
+        query.catch(error =>{
+            alert(error);
+        });
+
+</script>

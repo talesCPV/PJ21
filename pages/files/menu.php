@@ -10,28 +10,22 @@
     
     session_start();
 
-    $log = $_SESSION["log"];
+    if(!IsSet($_SESSION["log"])){
+        header('Location: intro.php');
+    }else{
+
+//    $log = $_SESSION["log"];
     $user = $_SESSION["user"];
     $id = $_SESSION["id"];
     $class = $_SESSION["class"];
 
-    echo '
-        <div id="mySidenav" class="sidenav">
-            <a  class="closebtn" onclick="closeNav()">&times;</a>    
+    echo "
+        <div id='mySidenav' class='sidenav'>
+            <a  class='closebtn' onclick='closeNav()'>&times;</a>    
         <hr>        
-    ';
-    if (!$log){ // Valida se o usuario esta logado
-        echo"
-            <div class='dropdown'>
-                <a href='intro.php'>Login</a> <hr>
-            </div>        
-        ";        
-    }else{
-
-        echo"
-            <div class='dropdown'>
-                <a href='intro.php' >".strtoupper($user)." - logout</a> <hr>
-            </div>        
+        <div class='dropdown'>
+            <a href='intro.php' >".strtoupper($user)." - logout</a> <hr>
+        </div>        
         ";  
 
         foreach ( $json_str['menu'] as $e ) {
@@ -58,7 +52,7 @@
                     $item_icone = $a['icone'];
 
                     if(in_array($class, $item_perm)){
-                      echo "<a onclick='openHTML(\"{$item_template}\",\"{$item_script}\",\"{$item_label}\")'>{$item_menu}</a>";
+                      echo "<a onclick='openHTML(\"{$item_template}\",\"{$item_label}\")'>{$item_menu}</a>";
                     }
                 }
 
