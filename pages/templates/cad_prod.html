@@ -41,13 +41,38 @@
     const btnSave = document.getElementById('btnSave');
     const cmbEmp = document.getElementById('cmbEmp');
     const cmbUnid = document.getElementById("cmbUnid");
-    
+    const edtDesc = document.getElementById("edtDesc");
+    const edtEtq = document.getElementById("edtEtq");
+    const edtEtqMin = document.getElementById("edtEtqMin");
+    const cmbTipo = document.getElementById("cmbTipo");
+    const edtCodProd = document.getElementById("edtCodProd");
+    const edtCodBar = document.getElementById("edtCodBar");
+    const edtNCM = document.getElementById("edtNCM");
+    const edtCompra = document.getElementById("edtCompra");
+    const edtMargem = document.getElementById("edtMargem"); 
+
     fillCmb(cmbEmp,"pesq_emp",['tipo','FOR'],[1,0]);
     fillCmb(cmbUnid,"unidade",['nome',''],[1,2]);
 
+ 
+
+    if(global_params.length > 0){
+        alert (global_params[6]);
+        alert(global_params);
+        edtDesc.value = global_params[2];
+        edtEtq.value = global_params[4];
+        edtEtqMin.value  = global_params[2];
+        edtCodProd.value = global_params[5];
+        edtCodBar.value = global_params[2];
+        edtNCM.value = global_params[8];
+        edtCompra.value = global_params[2];
+        edtMargem.value = global_params[2];
+
+    }
+
+
     btnSave.addEventListener('click',()=>{
         saveProd();
-
     });
 
     function saveProd(){
@@ -55,15 +80,7 @@
 
     query.then(result =>{
         const edtCod = JSON.parse(result);
-        const edtDesc = document.getElementById("edtDesc");
-        const edtEtq = document.getElementById("edtEtq");
-        const edtEtqMin = document.getElementById("edtEtqMin");
-        const cmbTipo = document.getElementById("cmbTipo");
-        const edtCodProd = document.getElementById("edtCodProd");
-        const edtCodBar = document.getElementById("edtCodBar");
-        const edtNCM = document.getElementById("edtNCM");
-        const edtCompra = document.getElementById("edtCompra");
-        const edtMargem = document.getElementById("edtMargem"); 
+
 
         let fields = [cmbEmp.value,edtDesc.value,edtEtq.value,edtEtqMin.value,cmbUnid.value, edtNCM.value, edtCod, edtCodProd.value, edtCompra.value, edtMargem.value, cmbTipo.value, edtCodBar.value];
 

@@ -1,4 +1,4 @@
-let global_id;
+let global_params;
 
 // *********    MODAL FUNCTIONS    **********
 

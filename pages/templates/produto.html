@@ -44,6 +44,7 @@
     const table = document.querySelector('.search-table');
 
     btnNovo.addEventListener("click", function(){
+        global_params = [];
         openHTML("cad_prod.html","Cadastro de Produto","modal");    
     });
 
@@ -110,11 +111,7 @@
             }
             let row = target.cells; 
 
-            global_id = row[0].firstChild.data;
-            openHTML("show_prod.html","Detalhes do Produto","modal");
 
-
-/*
             let id = row[0].firstChild ? row[0].firstChild.data : "" ;
             let cod = row[1].firstChild ? row[1].firstChild.data : "" ;
             let desc = row[2].firstChild ? row[2].firstChild.data : "" ;
@@ -126,8 +123,10 @@
             let ncm = row[8].firstChild ? row[8].firstChild.data : "" ;
             let tipo = row[9].firstChild ? row[9].firstChild.data : "" ;
         //       let salario = row[4].firstChild ? number(row[4].firstChild.data) : "" ;
-*/
+
            
+            global_params = [id,cod,desc,und,etq,codprod,empresa,preco,ncm,tipo];
+            openHTML("show_prod.html","Detalhes do Produto","modal");
 
 
         });
